@@ -1,0 +1,54 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
+
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Profile */
+/* @var $form yii\widgets\ActiveForm */
+?>
+
+<div class="profile-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <!--?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?-->
+
+    <?= $form->field($model, 'first_name')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'last_name')->textarea(['rows' => 6]) ?>
+
+    <!--?= $form->field($model, 'birthdate')->textInput() ?-->
+    <!--?php echo $form->field($model,'birthdate')->widget(DatePicker::className(),
+                            ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]);
+    ?-->
+    <?php echo $form->field($model, 'birthdate')->widget(DatePicker::className(),[
+        
+        'dateFormat' => 'yyyy-MM-dd',
+         'name' => 'dp_3',
+         'language' => 'es',
+         'clientOptions' => [
+           'yearRange' => '-115:+0',
+           'autoclose'=>true,
+           'changeYear' => true
+          ],
+          'options' => ['class' => 'form-control', 'style' => 'width:25%']
+    
+    ]) ?>
+    <?= $form->field($model, 'gender_id')->dropDownList($model->genderList,
+                                        ['prompt' => 'Please Choose One' ]);?>
+
+    <!--?= $form->field($model, 'gender_id')->textInput(['maxlength' => true]) ?-->
+
+    <!--?= $form->field($model, 'created_at')->textInput() ?-->
+
+    <!--?= $form->field($model, 'updated_at')->textInput() ?-->
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
